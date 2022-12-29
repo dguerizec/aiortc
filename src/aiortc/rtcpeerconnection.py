@@ -1000,6 +1000,8 @@ class RTCPeerConnection(AsyncIOEventEmitter):
             self.__pendingRemoteDescription = description
 
     async def __connect(self) -> None:
+        if not self.__transceivers:
+            return
         for transceiver in self.__transceivers:
             dtlsTransport = transceiver._transport
             iceTransport = dtlsTransport.transport
